@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>browniepoints</title>
+
+<link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />	
+<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.17.custom.min.js"></script>
+<script type="text/javascript" src="js/jquery.jrumble.1.3.min.js"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Magra|Slackey' rel='stylesheet' type='text/css'>
+    
+<script type="text/javascript">
+
+var pos = 0;
+var redeemed = false;
+
+$(function(){
+
+    $('#clickme').click(function() {
+      $('.progressbar').css("width","0");
+      $('.progressbar').animate({
+	width: 340,
+      }, 500, function() {
+	$('#prize2').css('borderColor','#FFA201');
+      });
+    });
+
+    $('.tab').click(function() {
+      $('.tab').css("background","");
+      $('.tab').removeClass("tabsel");
+      $(this).css("background","#292929");
+      if ($(this).attr("id") == "tab1") {
+	$('#slidercontent').animate({
+	  left: '0',
+	}, 500, 'easeInOutSine', function() {
+	    if (!redeemed) $('#redeembtn').trigger('startRumble');
+	});    
+      }
+      if ($(this).attr("id") == "tab2") {
+	$('#slidercontent').animate({
+	  left: '-1125',
+	}, 500, 'easeInOutSine', function() {
+	    $('#redeembtn').trigger('stopRumble');
+	});    
+      }
+      if ($(this).attr("id") == "tab3") {
+	$('#slidercontent').animate({
+	  left: '-2250',
+	}, 500, 'easeInOutSine', function() {
+	    $('#redeembtn').trigger('stopRumble');
+	});    
+      }
+    });
+
+    $('#redeembtn').click(function() {
+	if (!redeemed) {
+	    $('#redeembtn').trigger('stopRumble');
+	    $('#redeembtn').attr("src","images/redeembtndis.png");
+	    redeemed = true;
+	    $('#redeemmsg').fadeOut(500, function() { $('#redeemmsg2').show("puff", {}, 500); });
+	    $('#rewards2').show("puff", {}, 500, function() {$('#rewards').fadeIn(500);});
+	    $('.progressbar').animate({
+	      width: 420,
+	    }, 500, function() {
+	      // finished
+	    });
+	    $("#thepts").html("11");
+	    //var snd = new Audio("media/tada.mp3");
+	    //snd.play();	    
+	}
+    });
+
+    $('#redeembtn').jrumble({ speed: 100 });
+    $('#redeembtn').trigger('startRumble');
+
+    $('.progressbar').animate({
+      width: 320,
+    }, 500, function() {
+      // finished
+    });
+
+    $('#redeemmsg2').hide();
+
+});
+
+</script>
+
+<style>
+*       {font-family: arial; font-size: 12px;}
+body    {margin: 0px; padding: 0px; background: url(images/bg_pattern2.png);}
+
+.progress   {xposition: absolute;}
+.progressbar   {position: relative; background: #005D70; height: 25px; width: 0px; display: inline-block; border-top-left-radius: 17px; border-bottom-left-radius: 17px;}
+.progressend   {position: relative; background: #13869B; height: 34px; width: 34px; xborder: #202020 1px solid; border-radius: 17px; display: inline-block; top: 5px; left: -7px; -moz-box-shadow: 0px 0px 1em #444; -webkit-box-shadow: 0px 0px 1em #444; box-shadow: 0px 0px 1em #444;}
+
+.tab	{height: 125px; width: 120px; text-align: center;}
+.tabsel	{height: 125px; width: 120px; text-align: center; background: #292929;  -moz-box-shadow: 2px 2px 2em #333; -webkit-box-shadow: 2px 2px 2em #333; box-shadow: 2px 2px 2em #333;}
+
+#thepts	{font-size: 26px; color: #202020; font-family: Magra; margin-top: -4px;}
+
+</style>
+
+</head>
+
+<body>
+
+<div style="background: #292929;">
+    <div style="height: 40px; background: #292929; width: 960px; margin: 0 auto; padding-top: 5px;">
+	<img src="images/small-logo.png" border="0" />
+    </div>
+</div>
+
+<div style="width: 960px; margin: 22px auto;">
+
+    <table width="100%" cellpadding="0" cellspacing="0">
+	<tr>
+	    <td valign="top" align="right"><img src="images/katherine.gif" border="0"/><br/><div style="background: url(images/highlight.gif) no-repeat; color: #202020; padding: 10px; padding-top: 5px; padding-left: 15px; padding-right: 20px; display: inline-block; font-size: 20px; font-weight: bold; font-family: Magra;">&nbsp;<span id="thepts">&nbsp;9</span> points</div></td>
+	    <td width="100%">&nbsp;</td>
+	    <td><div id="tab1" class="tab tabsel"><img src="images/points.gif" border="0" /></div></td>
+	    <td><div id="tab2" class="tab"><img src="images/badges.gif" border="0" /></div></td>
+	    <td><div id="tab3" class="tab"><img src="images/messages.gif" border="0" /></div></td>
+	    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	</tr>
+    </table>
+
+    <div style="width: 960px; overflow: hidden; position: relative; vertical-align: top; -moz-box-shadow: 2px 2px 2em #333; -webkit-box-shadow: 2px 2px 2em #333; box-shadow: 2px 2px 2em #333;">
+	<div id="slidercontent" style="width: 4000px; position: relative; vertical-align: top; background: #292929;">
+	    <div style="width: 960px; padding: 40px; padding-left: 80px; padding-right: 80px; xheight: 200px; display: inline-block; background: #292929;">
+		<table style="margin-top: 22px;">
+		    <tr>
+			<td><img id="redeembtn" src="images/redeembtn.png" border="0" /></td>
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+			<td><img id="redeemmsg" src="images/redeemmsg.png" border="0" /><img id="redeemmsg2" src="images/redeemmsg2.gif" border="0" /></td>
+		    </tr>
+		</table>
+		
+		<div class="progress" style="margin-top: 44px;">
+		    <div class="progressbar"></div><div class="progressend"></div>
+		</div>
+	    
+		<div style="position: absolute; margin-top: 44px;">
+		    <img id="rewardsold" src="images/rewards.png" border="0" style="position: absolute; top: 0px;" />
+		    <img id="rewards2" src="images/rewards2.gif" border="0" style="position: absolute; top: 0px; z-index: 2; display: none;" />
+		    <img id="rewards" src="images/rewards2.png" border="0" style="position: absolute; top: 0px; z-index: 3; display: none;" />
+		</div>
+	    </div>
+	    <div style="width: 960px; padding: 40px; padding-left: 80px; vertical-align: top; padding-right: 80px; xheight: 200px; display: inline-block; background: #292929;">
+		<img src="images/badges_earned.png" border="0" /><br/>
+		<img src="images/badges_achievable.png" border="0" style="margin-top: 22px;" /><br/>
+	    </div>
+	    <div style="width: 960px; padding: 40px; padding-left: 80px; vertical-align: top; padding-right: 80px; xheight: 200px; display: inline-block; background: #292929;">
+		<img src="images/messages.png" border="0" style="margin-top: 32px;" />
+	    </div>
+	</div>
+    </div>
+
+</div>
+
+</body>
+</html>
